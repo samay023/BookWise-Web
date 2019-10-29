@@ -1,0 +1,32 @@
+{
+  "name": "bookwise-web",
+  "version": "1.0.0",
+  "description": "A booking website that helps anyone to manage booking easily",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samay023/BookWise-Web.git"
+  },
+  "keywords": [
+    "Booking",
+    "software"
+  ],
+  "author": "AlanSJ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samay023/BookWise-Web/issues"
+  },
+  "homepage": "https://github.com/samay023/BookWise-Web#readme",
+  "dependencies": {
+    "apollo-server": "^2.9.7",
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "graphql": "^14.5.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
