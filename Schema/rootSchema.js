@@ -1,36 +1,58 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server");
 
 const rootSchema = gql`
-    type Query {
-        getEvents: [Event]
-    }
+  type Query {
+    getSessions: [Session]
+  }
 
-    type Mutation {
-        addEvent(name: String, date: String, address: AddressInput): [Event]
-    }
+  type Mutation {
+    addSession(
+      eventType: String
+      description: String
+      sessionFee: Int
+      address: AddressInput
+      eventTimings: EventInput
+    ): Session
+  }
+  type Session {
+    _id: String
+    eventType: String
+    description: String
+    sessionFee: Int
+    address: Address
+    createdDate: String
+    eventTimings: EventTimings
+  }
 
-    input AddressInput {
-        streetNumber: Int,
-        streetName: String,
-        suburb: String,
-        state: String,
-        country: String
-    }
+  type EventTimings {
+    eventStartDate: String
+    eventEndDate: String
+    duration: Int
+    breakPeriod: Int
+  }
 
-    type Event{
-        name: String,
-        date: String,
-        address: Address
-    }
+  input EventInput {
+    eventStartDate: String
+    eventEndDate: String
+    duration: Int
+    breakPeriod: Int
+  }
 
-    type Address{
-        streetNumber: Int,
-        streetName: String,
-        suburb: String,
-        state: String,
-        country: String
-    }
-    
+  type Address {
+    streetNumber: Int
+    streetName: String
+    suburb: String
+    state: String
+    country: String
+  }
+
+  input AddressInput {
+    streetNumber: Int
+    streetName: String
+    suburb: String
+    state: String
+    country: String
+  }
 `;
 
 module.exports = rootSchema;

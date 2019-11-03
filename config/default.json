@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mmongodb+srv://admin:Alan1994@bookwise-gv7xm.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "bookwiseSecretTokenKey"
+}
