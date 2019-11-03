@@ -27,7 +27,7 @@ const resolvers = {
             const newEvent = {
                 name: args.name,
                 date: args.date,
-                address: args.input
+                address: args.address
             }
             eventArray.push(newEvent)
             return eventArray

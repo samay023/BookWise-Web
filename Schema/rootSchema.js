@@ -6,7 +6,7 @@ const rootSchema = gql`
     }
 
     type Mutation {
-        addEvent(name: String, date: String, input: AddressInput): [Event]
+        addEvent(name: String, date: String, address: AddressInput): [Event]
     }
 
     input AddressInput {
