@@ -1,41 +1,16 @@
 const { gql } = require("apollo-server");
+const clientSchema = require("./clientSchema");
+const sessionSchema = require("./sessionSchema");
 
 const rootSchema = gql`
+  scalar Date
+
   type Query {
-    getSessions: [Session]
+    _: Boolean
   }
 
   type Mutation {
-    addSession(
-      eventType: String
-      description: String
-      sessionFee: Int
-      address: AddressInput
-      eventTimings: EventInput
-    ): Session
-  }
-  type Session {
-    _id: String
-    eventType: String
-    description: String
-    sessionFee: Int
-    address: Address
-    createdDate: String
-    eventTimings: EventTimings
-  }
-
-  type EventTimings {
-    eventStartDate: String
-    eventEndDate: String
-    duration: Int
-    breakPeriod: Int
-  }
-
-  input EventInput {
-    eventStartDate: String
-    eventEndDate: String
-    duration: Int
-    breakPeriod: Int
+    _: Boolean
   }
 
   type Address {
@@ -55,4 +30,4 @@ const rootSchema = gql`
   }
 `;
 
-module.exports = rootSchema;
+module.exports = [rootSchema, sessionSchema, clientSchema];

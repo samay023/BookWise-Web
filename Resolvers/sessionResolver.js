@@ -12,8 +12,16 @@ const addSession = async session => {
 };
 
 const SessionResolver = {
-  getAllSessions,
-  addSession
+  Query: {
+    getSessions: (parent, args, context) => {
+      return getAllSessions();
+    }
+  },
+  Mutation: {
+    addSession: (parent, args) => {
+      return addSession(args);
+    }
+  }
 };
 
 module.exports = SessionResolver;
