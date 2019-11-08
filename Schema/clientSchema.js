@@ -10,6 +10,7 @@ module.exports = gql`
   }
 
   type Client {
+    id: String
     firstname: String
     surname: String
     address: Address
