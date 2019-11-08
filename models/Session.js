@@ -45,26 +45,15 @@ const SessionSchema = new mongoose.Schema(
         required: true
       },
       breakPeriod: {
-        type: Number
-      },
-      client: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "client"
+        type: Number,
+        default: 30
       }
+    },
+    clientDetails: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client"
     }
-    //   },
-    //   creator: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "user"
-    //   },
-    //   activity: [
-    //     {
-    //       type: mongoose.Schema.Types.ObjectId,
-    //       ref: "activities"
-    //     }
-    // ]
-  },
-  { strict: false }
+  }
 );
 
-module.exports = Session = mongoose.model("session", SessionSchema);
+module.exports = Session = mongoose.model("Session", SessionSchema);

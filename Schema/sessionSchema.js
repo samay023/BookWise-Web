@@ -12,7 +12,7 @@ module.exports = gql`
       sessionFee: Int
       address: AddressInput
       eventTimings: EventInput
-      client: String
+      clientDetails: String
     ): Session
   }
 
@@ -24,7 +24,7 @@ module.exports = gql`
     address: Address
     createdDate: Date
     eventTimings: EventTimings
-    client: Client
+    clientDetails: Client
   }
 
   type EventTimings {

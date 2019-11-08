@@ -24,4 +24,4 @@ const ClientSchema = new mongoose.Schema({
   mobilePhone: { type: String, required: true }
 });
 
-module.exports = Client = mongoose.model("client", ClientSchema);
+module.exports = Client = mongoose.model("Client", ClientSchema);
