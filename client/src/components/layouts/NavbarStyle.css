@@ -1,0 +1,32 @@
+.NavBar {
+  background-color: #242e42;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: fixed;
+  height: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.row:first-child {
+  height: 100px;
+  align-content: center;
+}
+
+.row {
+  height: 50px;
+  width: 150px;
+}
+/* On screens that are less than 700px */
+@media screen and (max-width: 700px) {
+  .NavBar {
+    width: 50px;
+    text-align: left;
+    padding-left: 15px;
+  }
+  .hide-sm {
+    display: none;
+  }
+}
