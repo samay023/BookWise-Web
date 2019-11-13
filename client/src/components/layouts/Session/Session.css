@@ -1,0 +1,55 @@
+.Session {
+  background-color: #f4f5f5;
+  display: block;
+  position: fixed;
+  overflow-y: scroll;
+  height:100vh;
+}
+.AddSession {
+  margin-left: 45px;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.AddSession button {
+  background-color: white;
+  color: black;
+  font-family: sans-serif;
+  border: solid;
+}
+
+.CurrentSessions{
+  margin-top:5px;
+  margin-left:10px;
+}
+.title{
+  margin-right: 3px;
+}
+.title.row{
+  font-weight: bold;
+  height: 30px;
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+.SessionDetails{
+  width: 280px;
+  height: 50px;
+  align-content: center;
+  text-align: center;
+  background-color: white;
+  position: relative;
+  border: groove;
+  margin-top: 10px;
+}
+.Date{
+  max-width: 120px;
+  border-right: groove;
+}
+
+
+/* On screens that are less than 700px */
+@media screen and (max-width: 700px) {
+  .Session {
+    margin-left: 30px;
+  }
+}

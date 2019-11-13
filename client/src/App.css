@@ -1,9 +1,9 @@
+.AllElements{
+  -webkit-font-smoothing: antialiased;
+  font-family: sans-serif;
+}
 .Container {
-  margin-top: 0px;
-  position: relative;
-  margin-left: 120px;
-  position: absolute;
-  height: 100%;
+  margin-left: 150px;
 }
 
 /* On screens that are less than 700px */
