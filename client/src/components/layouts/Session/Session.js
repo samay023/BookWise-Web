@@ -1,17 +1,19 @@
 import React from "react";
 import "./Session.css";
-import CurrentSessions from "./CurrentSessions";
-import AddSession from "./AddSession";
+import SessionList from "./SessionList";
+import SessionAdd from "./SessionAdd";
+import SessionDetails from "./SessionDetail";
 
-const SessionMenu = () => {
+const Session = () => {
   return (
     <div className='Session'>
       <div className='SessionMenu'>
-        <AddSession />
-        <CurrentSessions />
+        <SessionAdd />
+        <SessionList />
       </div>
+      <SessionDetails />
     </div>
   );
 };
 
-export default SessionMenu;
+export default Session;
