@@ -44,19 +44,19 @@
   border-radius: .25rem;
 }
 .SessionDetails:hover {
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color:#242e42;
+  border-color: #242e42;
   color: white;
   letter-spacing: 1px;
   transition: all 0.4s ease 0s;
   border-radius: .50rem;
 }
-.SessionDetails:active {
-  background-color: #007bff;
-  border-color: #007bff;
+.SessionDetails.active {
+  background-color:#242e42;
+  opacity: 90%;
+  border-color: #242e42;
   color: white;
   letter-spacing: 1px;
-  transition: all 0.4s ease 0s;
   border-radius: .50rem;
 }
 
