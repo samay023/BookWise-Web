@@ -1,45 +1,46 @@
-import { Row, Col } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import React from "react";
+import { Link } from "react-router-dom";
 import "./NavbarStyle.css";
 
 const NavbarMenu = () => {
   return (
     <div className='NavBar'>
       <Row id="title">
-        <Col>
+        <Link to="/">
           <span className='hide-sm'> BookWise</span>
-        </Col>
+        </Link>
       </Row>
       <div className="MenuItems">
         <Row>
-          <Col>
+          <Link to="/admin">
             <i className='fas fa-users-cog'></i>
             <span className='hide-sm'> Admin</span>
-          </Col>
+          </Link>
         </Row>
         <Row>
-          <Col>
+          <Link to="/session">
             <i className='fas fa-camera-retro' />
             <span className='hide-sm'> Session</span>
-          </Col>
+          </Link>
         </Row>
         <Row>
-          <Col>
+          <Link to="/clients">
             <i className='fas fa-address-book' />
             <span className='hide-sm'> Clients</span>
-          </Col>
+          </Link>
         </Row>
         <Row>
-          <Col>
+          <Link to="/account">
             <i className='fas fa-cogs' />
             <span className='hide-sm'> Account</span>
-          </Col>
+          </Link>
         </Row>
         <Row>
-          <Col>
+          <Link to="/logout">
             <i className='fas fa-sign-out-alt' />
             <span className='hide-sm'> Logout</span>
-          </Col>
+          </Link>
         </Row>
       </div>
     </div>
