@@ -1,0 +1,9 @@
+.Clients{
+    display: block;
+    overflow-y: scroll;
+    padding-top: 20px;
+    margin-left: 45px;
+}
+.ClientList{
+    cursor:pointer;
+}
