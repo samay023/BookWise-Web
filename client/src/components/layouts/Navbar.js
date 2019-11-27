@@ -13,15 +13,9 @@ const NavbarMenu = () => {
       </Row>
       <div className="MenuItems">
         <Row>
-          <Link to="/admin">
-            <i className='fas fa-users-cog'></i>
-            <span className='hide-sm'> Admin</span>
-          </Link>
-        </Row>
-        <Row>
           <Link to="/session">
             <i className='fas fa-camera-retro' />
-            <span className='hide-sm'> Session</span>
+            <span className='hide-sm'> Sessions</span>
           </Link>
         </Row>
         <Row>

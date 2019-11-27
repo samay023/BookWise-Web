@@ -2,12 +2,27 @@
   -webkit-font-smoothing: antialiased;
   font-family: sans-serif;
 }
+/* Nav bar container */
 .Container {
   margin-left: 150px;
 }
 
+/* Content Container */
+.container{
+  display: block;
+  overflow-y: scroll;
+  padding-top: 20px;
+  margin-left: 45px;
+}
+
+.InformationText{
+  font-size: .90rem;
+  color: #777;
+}
+
 /* On screens that are less than 700px */
 @media screen and (max-width: 700px) {
+  /* Nav bar container */
   .Container {
     margin-left: 20px;
   }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Table, InputGroup, FormControl, Modal, Button } from "react-bootstrap";
 import "./ClientStyle.css";
 
-const EditClientForm = (clientData) => {
+const editClientForm = (clientData) => {
   return(
       <div style={{fontSize:'14px'}}>
           <InputGroup size="sm">
@@ -70,7 +70,6 @@ const Client = () => {
     setEditClient(true);
 }
 
-
   const initialData = [{
     FirstName: "Mark",
     Surname:"Otto",
@@ -131,7 +130,7 @@ const Client = () => {
                   <Modal.Header closeButton>
                       <Modal.Title><i className='fas fa-address-book' /> Client Details</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body> {EditClientForm(clientData)} </Modal.Body>  
+                  <Modal.Body> {editClientForm(clientData)} </Modal.Body>  
                   <Modal.Footer>
                       <Button variant="secondary" onClick={handleClose}>
                           Cancel
@@ -146,14 +145,14 @@ const Client = () => {
   };
 
   return (
-    <div className='Clients'>
+    <div className='container'>
       <h3>List of all Clients</h3>
       <br/>
       <div className="ClientList"> 
         <Table responsive hover borderless>
           <thead>
             <tr>
-              <th>#</th>
+              <th className="hide-sm">#</th>
               <th>First Name</th>
               <th>Surname</th>
               <th>Email</th>
@@ -164,7 +163,7 @@ const Client = () => {
           <tbody>
           {initialData.map((clientdata,index) => (
             <tr key={index+1} onClick={() => handleOpen(clientdata)}>
-              <td>{index+1}</td>
+              <td className="hide-sm">{index+1}</td>
               <td>{clientdata.FirstName}</td>
               <td>{clientdata.Surname}</td>
               <td>{clientdata.Email}</td>
