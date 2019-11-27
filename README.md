@@ -1,6 +1,20 @@
 # BookWise-Web
 A booking website that helps anyone to manage booking easily
 
+# Tech Stack (ServerSide)
+```
+Apollo Server
+GraphQL
+MongoDB
+```
+# Tech Stack (ClientSide)
+```
+React
+Redux
+Redux-thunk
+Apollo Client
+Bootstrap
+```
 
 ## Getting Started
 
