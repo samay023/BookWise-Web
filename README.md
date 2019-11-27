@@ -7,7 +7,7 @@ Apollo Server
 GraphQL
 MongoDB
 ```
-# Tech Stack (ServerSide)
+# Tech Stack (ClientSide)
 ```
 React
 Redux
