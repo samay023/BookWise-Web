@@ -6,14 +6,14 @@ A booking website that helps anyone to manage booking easily
 Apollo Server
 GraphQL
 MongoDB
+Mongoose
 ```
 # Tech Stack (ClientSide)
 ```
 React
-Redux
-Redux-thunk
 Apollo Client
 Bootstrap
+Flexbox
 ```
 
 ## Getting Started
