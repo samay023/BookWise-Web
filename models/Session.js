@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const SessionSchema = new mongoose.Schema(
   {
-    eventType: {
+    title: {
       type: String,
       required: true
     },
-    description: {
+    description:{
       type: String,
-      required: true
     },
     sessionFee: { type: Number },
     address: {
@@ -23,31 +22,28 @@ const SessionSchema = new mongoose.Schema(
       state: {
         type: String
       },
-      country: {
-        type: String
+      postcode:{
+        type: Number
       }
     },
     createdDate: {
       type: Date,
       default: Date.now
     },
-    eventTimings: {
-      eventStartDate: {
-        type: Date,
-        required: true
-      },
-      eventEndDate: {
-        type: Date,
-        required: true
-      },
-      duration: {
-        type: Number,
-        required: true
-      },
-      breakPeriod: {
-        type: Number,
-        default: 30
-      }
+    sessionDate: {
+      type: Date,
+      required: true
+    },
+    sessionStartTime: {
+      type: Date,
+      required: true
+    },
+    sessionEndTime: {
+      type: Date,
+      required: true
+    },
+    notes:{
+      type: String
     },
     clientDetails: {
       type: mongoose.Schema.Types.ObjectId,

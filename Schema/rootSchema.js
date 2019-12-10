@@ -17,16 +17,16 @@ const rootSchema = gql`
     streetNumber: Int
     streetName: String
     suburb: String
+    postcode: Int
     state: String
-    country: String
   }
 
   input AddressInput {
     streetNumber: Int
     streetName: String
     suburb: String
+    postcode: Int
     state: String
-    country: String
   }
 `;
 

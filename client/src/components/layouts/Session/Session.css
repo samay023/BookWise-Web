@@ -8,18 +8,20 @@
 .AddSession {
   margin-left: 45px;
   align-self: center;
-  margin-top: 20px;
 }
 
 .AddSession button {
+  margin-top: 30px;
+  position: fixed;
   background-color: white;
   color: black;
   font-family: sans-serif;
   border: solid;
+  z-index: 1;
 }
 
 .CurrentSessions{
-  margin-top:5px;
+  margin-top: 60px;
   margin-left:10px;
 }
 .title{
@@ -47,8 +49,6 @@
   background-color:#242e42;
   border-color: #242e42;
   color: white;
-  letter-spacing: 1px;
-  transition: all 0.4s ease 0s;
   border-radius: .50rem;
 }
 .SessionDetails.active {
@@ -56,7 +56,6 @@
   opacity: 90%;
   border-color: #242e42;
   color: white;
-  letter-spacing: 1px;
   border-radius: .50rem;
 }
 
@@ -68,11 +67,11 @@
 .IndividualSessionDetails{
   position: static;
   margin-left: 310px;
-  margin-top: 125px;
   overflow-y: scroll;
 }
 
 .IndividualSessionDetails .title{
+  margin-top: 125px;
   font-size: 1.5rem;
 }
 .IndividualSessionDetails .InformationText{

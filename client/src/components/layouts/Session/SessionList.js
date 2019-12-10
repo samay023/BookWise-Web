@@ -1,54 +1,73 @@
 import { Container, Row, Col} from "react-bootstrap";
-import React, {useState} from "react";
+import React, {useState, Fragment, useEffect} from "react";
+import SessionDetails from "./SessionDetail";
 import "./Session.css";
+import Moment from 'moment';
 
-const SessionList = () => {
+const SessionList = (props) => {
+    const sortedSessions =  props.session;
+
     const [row, activeRow] = useState({
-        key: "1",
+        key: 0,
         selected : true
     });
 
     const setActiveRow = (event) => {
-        activeRow({key: event.currentTarget.id,selected:true});
+        activeRow({key: Number(event.currentTarget.id),selected:true});
     };
 
-  return (
-    <Container className="CurrentSessions">
-    <div>
-      <Row className="title">December, 2019</Row>
-      <Row id="1" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "1" ? 'active' : ''}`}>
-          <Col className="Date">12 - Thu</Col>
-          <Col>Birthday Shoot</Col>
-      </Row>
-      <Row id="2" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "2" ? 'active' : ''}`}>
-          <Col className="Date">15 - Sun</Col>
-          <Col>Indoor shoot</Col>
-      </Row>
-    </div>
-    <div>
-        <Row className="title">January, 2020</Row>
-        <Row id="3" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "3" ? 'active' : ''}`}>
-            <Col className="Date">01 - Mon</Col>
-            <Col>Birthday Shoot</Col>
-        </Row>
-        <Row id="4" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "4" ? 'active' : ''}`}>
-            <Col className="Date">30 - Tues</Col>
-            <Col>Indoor shoot</Col>
-        </Row>
-    </div>
-    <div>
-        <Row className="title">Februray, 2020</Row>
-        <Row id="5" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "5" ? 'active' : ''}`}>
-            <Col className="Date">15 - Wed</Col>
-            <Col>Birthday Shoot</Col>
-        </Row>
-        <Row id="6" onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === "6" ? 'active' : ''}`}>
-            <Col className="Date">25 - Fri</Col>
-            <Col>Indoor shoot</Col>
-        </Row>
-      </div>
-  </Container>
-  );
-};
+    let currentMonth;
+    let previousMonth;
+    const DisplaySortedSessions = () => {
+
+        return (sortedSessions.map((session, index) => {
+               
+            if(!previousMonth){
+                // Loop just started
+                currentMonth = Moment(session.sessionDate).format('MMMM, YYYY');
+                previousMonth = Moment(session.sessionDate).format('MMMM, YYYY');
+            }
+            currentMonth = Moment(session.sessionDate).format('MMMM, YYYY');
+            // If current Month and previous month is not same
+            // We need to create a new List 
+            if(currentMonth!==previousMonth){
+                previousMonth = currentMonth;
+                return (
+                <Fragment key={index}>
+                    <Row className="title">{currentMonth}</Row>
+                    <Row id={index} onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === index ? 'active' : ''}`}>
+                        <Col className="Date">{Moment(session.sessionDate).format('DD - ddd')}</Col>
+                        <Col>{session.title}</Col>
+                    </Row>
+                </Fragment>)
+            }
+            else{
+                previousMonth = currentMonth;
+                return (
+                <Fragment key={index}>
+                    {/* We need to display title if its the first session in the array */}
+                    {index===0 && <Row className="title">{currentMonth}</Row>}
+                    <Row id={index} onClick={setActiveRow.bind(this)} className={`SessionDetails ${row.key === index ? 'active' : ''}`}>
+                        <Col className="Date">{Moment(session.sessionDate).format('DD - ddd')}</Col>
+                        <Col>{session.title}</Col>
+                    </Row>
+                </Fragment>
+                )
+            }
+                
+            }));
+        };
+
+    return (
+        <Fragment>
+            <div className="SessionMenu">
+                <Container className="CurrentSessions">
+                    <DisplaySortedSessions />
+                </Container>
+            </div>
+            <SessionDetails session={sortedSessions[row.key]}/>
+        </Fragment>
+    );
+  };
 
 export default SessionList;

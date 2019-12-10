@@ -1,5 +1,4 @@
 const Session = require("../models/Session");
-const mongoose = require("mongoose");
 
 const getAllSessions = async () => {
   try{

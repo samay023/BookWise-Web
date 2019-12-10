@@ -7,37 +7,29 @@ module.exports = gql`
 
   extend type Mutation {
     addSession(
-      eventType: String
+      title: String
       description: String
       sessionFee: Int
       address: AddressInput
-      eventTimings: EventInput
+      sessionDate: Date
+      sessionStartTime: Date
+      sessionEndTime: Date
+      notes: String
       clientDetails: String
     ): Session
   }
 
   type Session {
     id: String
-    eventType: String
+    title: String
     description: String
     sessionFee: Int
     address: Address
     createdDate: Date
-    eventTimings: EventTimings
+    sessionDate: Date
+    sessionStartTime: Date
+    sessionEndTime: Date
+    notes: String
     clientDetails: Client
-  }
-
-  type EventTimings {
-    eventStartDate: Date
-    eventEndDate: Date
-    duration: Int
-    breakPeriod: Int
-  }
-
-  input EventInput {
-    eventStartDate: String
-    eventEndDate: String
-    duration: Int
-    breakPeriod: Int
   }
 `;
