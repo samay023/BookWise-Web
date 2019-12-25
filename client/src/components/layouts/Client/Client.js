@@ -124,7 +124,7 @@ const Client = () => {
   }
   ];
 
-  const clientModal = () => {
+  const ClientModal = () => {
     return (<div className="EditClient">
               <Modal show={editClient} onHide={handleClose} size="md">
                   <Modal.Header closeButton>
@@ -174,7 +174,7 @@ const Client = () => {
           </tbody>
         </Table>
       </div>
-      {clientModal()}   
+      <ClientModal/>   
     </div>
   );
 };

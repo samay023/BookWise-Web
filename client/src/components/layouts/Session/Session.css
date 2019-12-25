@@ -78,6 +78,16 @@
   font-size: .75rem;
   color: #777;
 }
+.clientColumns{
+  padding:10%;
+  cursor:pointer;
+}
+.clientColumns:hover {
+  background-color:#242e42;
+  border-color: #242e42;
+  color: white;
+  border-radius: .50rem;
+}
 .TimePicker{
   height: 31px !important;
 }

@@ -13,6 +13,9 @@ const ClientSchema = new mongoose.Schema({
     suburb: {
       type: String
     },
+    postcode: {
+      type: Number
+    },
     state: {
       type: String
     },

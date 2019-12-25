@@ -1,3 +1,16 @@
 .ClientList{
     cursor:pointer;
 }
+.ClientCardList{
+    overflow-y: scroll;
+    max-height: 300px;
+}
+
+.ClientCardList .card{
+    cursor:pointer;
+}
+.ClientCardList .card:hover {
+    background-color:#242e42;
+    border-color: #242e42;
+    color: white;
+  }
