@@ -17,6 +17,19 @@ module.exports = gql`
       notes: String
       clientDetails: String
     ): Session
+
+    updateSession(
+      id: String
+      title: String
+      description: String
+      sessionFee: Int
+      address: AddressInput
+      sessionDate: Date
+      sessionStartTime: Date
+      sessionEndTime: Date
+      notes: String
+      clientDetails: String
+    ): Session
   }
 
   type Session {

@@ -7,15 +7,9 @@ import ExistingClients from "../Client/ExistingClients";
 
 const SessionDetails = (props) => {
 
-    const [show, setShow] = useState(true);
+    const {ReloadSessions} = props;
 
-    const handleClose = () => {
-        setShow(false);
-    };
-    const handleOpen = () => {
-        setShow(true);
-    };
-
+    // Displays the options when Edit client is clicked
     const ClientDetails = ({session}) => {
 
         const [optionSelected, setOption] = useState(false);
@@ -26,22 +20,69 @@ const SessionDetails = (props) => {
             });
         };
 
-        const Options = () => {
+        const [client, setClient] = useState({
+            firstname:"",
+            surname:"",
+            email:"",
+            mobilePhone:"",
+            address: {
+                streetNumber:"",
+                streetName:"",
+                suburb:"",
+                postcode:"",
+                state:""
+            }
+        });
+
+        const [show, setShow] = useState(false);
+
+        const handleClose = () => {
+            
+            // Save client
+            console.log(client);
+            console.log("Selected option is "+optionSelected.option);
+
+            // Need to call useMutation to add / link client to the session
+            
+            //Reset the option
+            setOption(false);
+            // Reload session details
+            ReloadSessions();
+            // Finally close the modal
+            setShow(false);
+        };
+        const handleOpen = () => {
+            setShow(true);
+        };
+
+        const updateClient = (evt) =>{
+
+            if(evt.target.dataset && evt.target.dataset.parent === "address"){
+                client.address[evt.target.name] = evt.target.value;
+            }
+            else if(evt && evt.target && evt.target.name){
+                client[evt.target.name] = evt.target.value;
+            }
+            setClient(client);
+
+        }; 
+
+        const ClientModal = () => {
 
             if(optionSelected.option === 'Add'){
                 return(
-                    <AddClient />
+                    <AddClient updateClient={updateClient} />
                 )
             }
             else if (optionSelected.option === 'Link'){
-                return (<ExistingClients />)
+                return (<ExistingClients session={session}/>)
             }
             else{
                 return null;
             }
         };
 
-        const ModalBody = () =>{
+        const DisplayOptions = () =>{
             return(
                 <Fragment>
                     {!optionSelected && 
@@ -54,47 +95,51 @@ const SessionDetails = (props) => {
                         </Flexbox>
                     </Flexbox>
                     }
-                    
-                    <Options />
+                    <ClientModal />
                 </Fragment>
                 
             )
         };
 
-        if(session.clientDetails){
-                return(
+        const ClientExists = () =>{
+            return (
+                <Fragment>
+                    <Button className="sessionEdit" variant="outline-info" onClick={handleOpen}>Edit Client</Button>
+                    <p><strong>Client name: </strong>{session.clientDetails.firstname + " "+ session.clientDetails.surname}</p>
+                    <p><strong>Email: </strong>{session.clientDetails.email}</p>
+                    <p><strong>Phone no: </strong>{session.clientDetails.mobilePhone}</p>
+                </Fragment>
+            );
+        };
+
+        const ClientDoesNotExist = () =>{
+            return <Button className="sessionEdit" variant="outline-info" onClick={handleOpen}>Add Client</Button>
+        }
+
+        return(
+            <Fragment>
                 <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
                     <p><i className="fas fa-address-book"/>&nbsp;<strong>Client Details</strong></p>
-                    <p><strong>Client name: </strong>Alan Samuel</p>
-                    <p><strong>Email: </strong>alansamuel@gmail.com</p>
-                    <p><strong>Phone no: </strong>0433990909</p>
-                </Flexbox>)
-        }
-        else{
-            return(
-                <Fragment>
-                    <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
-                        <p><i className="fas fa-address-book"/>&nbsp;<strong>Client Details</strong></p>
-                    </Flexbox>
-                    <Button className="editButton" variant="outline-info" onClick={handleOpen}>Link Client</Button>
-                    <Modal show={show} onHide={handleClose} size="md">
-                        <Modal.Header closeButton>
-                        <Modal.Title><i className='fas fa-address-book' /> Link Client</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body> <ModalBody /> </Modal.Body>
-                        
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Cancel
-                            </Button>
-                            <Button variant="primary" onClick={handleClose}>
-                                Save
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                </Fragment>
-            )
-        }
+                    {session.clientDetails ? <ClientExists /> : <ClientDoesNotExist />}
+                </Flexbox>
+                <Modal show={show} onHide={handleClose} size="md">
+                    <Modal.Header closeButton>
+                    <Modal.Title><i className='fas fa-address-book' /> Link Client</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body> <DisplayOptions /> </Modal.Body>
+                    
+                    <Modal.Footer>
+                        <Button name="Cancel" variant="secondary" onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button name="Save"variant="primary" onClick={handleClose}>
+                            Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </Fragment>
+        )
+        
     }
     const sessions = props.session;
     
@@ -102,14 +147,17 @@ const SessionDetails = (props) => {
         sessions && (
             <Fragment>
                 <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
-                    <p className="title">{sessions.title}</p>
+                    <Flexbox flexDirection="row" alignItems="baseline" display="inline-flex">
+                        <p className="title">{sessions.title}</p>
+                        <Button className="sessionEdit" style={{marginTop:"120px"}} variant="outline-info">Edit</Button>
+                    </Flexbox>
                     <p>Share this single session with your client once you have filled out the details and have set a date and time.</p> 
                 </Flexbox>
                 <hr/>
 
             <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
                 <p><i className="fas fa-camera-retro"/> <strong>Session Details</strong></p>
-                <p>{sessions.description}. Booked by Alan on the {Moment(sessions.createdDate).format("MMMM Do, YYYY")} </p>
+                <p>{sessions.description}</p>
                
                 <p><strong>Total Fee: </strong>{sessions.sessionFee}$</p>
                 <p><i className="far fa-address-card"/>&nbsp;<strong>Location: </strong>
@@ -132,7 +180,7 @@ const SessionDetails = (props) => {
             <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
                 <p><i className="far fa-clipboard"/>&nbsp;<strong>Session notes</strong></p>
                 <p className="InformationText">Notes are only visible to you. List your to-dos, or jot down reminders to yourself.</p>
-                <FormControl as="textarea" style={{fontSize:'14px'}} value={sessions.notes} readOnly/>
+                <FormControl as="textarea" style={{fontSize:'14px', width:"400px", height:"auto"}} value={sessions.notes} readOnly/>
             </Flexbox>
             <hr/>
 

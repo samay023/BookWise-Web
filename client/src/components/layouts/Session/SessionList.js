@@ -1,11 +1,12 @@
 import { Container, Row, Col} from "react-bootstrap";
-import React, {useState, Fragment, useEffect} from "react";
+import React, {useState, Fragment} from "react";
 import SessionDetails from "./SessionDetail";
 import "./Session.css";
 import Moment from 'moment';
 
 const SessionList = (props) => {
     const sortedSessions =  props.session;
+    const {ReloadSessions} = props;
 
     const [row, activeRow] = useState({
         key: 0,
@@ -65,7 +66,7 @@ const SessionList = (props) => {
                     <DisplaySortedSessions />
                 </Container>
             </div>
-            <SessionDetails session={sortedSessions[row.key]}/>
+            <SessionDetails session={sortedSessions[row.key]} ReloadSessions={ReloadSessions}/>
         </Fragment>
     );
   };

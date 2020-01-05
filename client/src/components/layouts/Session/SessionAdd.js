@@ -11,7 +11,7 @@ import { addSession } from "../../../resolvers/sessionResolver";
 let globalState = {};
 
 const SessionAdd = (props) => {
-    const {onAdd} = props;
+    const { ReloadSessions } = props;
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -37,9 +37,12 @@ const SessionAdd = (props) => {
             sessionEndTime:String(globalState.sessionEndTime),
             notes:String(globalState.notes)
         }
+        // Save session
         await AddSessionInput({variables});
-        setShow(false);   
-        onAdd();
+        // hide modal
+        setShow(false);
+        // Reload sessions   
+        ReloadSessions();
       };
 
     if(error){
@@ -112,9 +115,6 @@ const AddSessionForm = () =>{
         }
         else if(evt && evt.target && evt.target.name){
             sessionDetails[evt.target.name] = evt.target.value;
-        }
-        else {
-            
         }
         setSessionDetails(sessionDetails);
         globalState = sessionDetails;  

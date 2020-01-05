@@ -2,15 +2,24 @@
     cursor:pointer;
 }
 .ClientCardList{
+    text-align: center;
     overflow-y: scroll;
     max-height: 300px;
 }
 
 .ClientCardList .card{
+    display: inline-block;
     cursor:pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .ClientCardList .card:hover {
     background-color:#242e42;
     border-color: #242e42;
     color: white;
   }
+.ClientCardList .card.active {
+    background-color:#242e42;
+    border-color: #242e42;
+    color: white;
+}

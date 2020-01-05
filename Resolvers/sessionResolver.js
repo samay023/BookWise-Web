@@ -21,6 +21,15 @@ const addSession = async session => {
   return result;
 };
 
+const updateSession = async sessionparam =>{
+  let updateSession = await Session.findByIdAndUpdate(sessionparam.id,sessionparam,{
+    new:true,
+    useFindAndModify:false
+  });
+  return updateSession;
+  
+}
+
 const SessionResolver = {
   Query: {
     getSessions: (parent, args, context) => {
@@ -30,6 +39,9 @@ const SessionResolver = {
   Mutation: {
     addSession: (parent, args) => {
       return addSession(args);
+    },
+    updateSession: (parent,args) => {
+      return updateSession(args);
     }
   }
 };

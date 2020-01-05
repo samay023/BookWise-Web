@@ -18,11 +18,11 @@ const Session = () => {
 
     if (loading) return "Loading";
     if (error) return `Error! ${error}`;
-    const getSortedSessions = sortByMonths(data); 
+    const getSortedSessions = sortByMonths(data || {}); 
     return (
       <div className='Session'>
-          <SessionAdd onAdd={refetch}/>
-          {getSortedSessions.length > 0 && <SessionList session={getSortedSessions}/>}
+          <SessionAdd ReloadSessions={refetch}/>
+          {getSortedSessions.length > 0 && <SessionList session={getSortedSessions} ReloadSessions={refetch}/>}
       </div>
     );
 };
