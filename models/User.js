@@ -14,11 +14,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  googleCalendar: {
-    verified: {
-      type: Boolean
-    }
-  },
   businessName: {
     type: String
   },

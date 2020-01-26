@@ -4,6 +4,7 @@ import {FormControl, Button, Modal } from "react-bootstrap";
 import Moment from "moment";
 import AddClient from "../Client/AddClient";
 import ExistingClients from "../Client/ExistingClients";
+import SessionAdd from "./SessionAdd";
 
 const SessionDetails = (props) => {
 
@@ -104,7 +105,7 @@ const SessionDetails = (props) => {
         const ClientExists = () =>{
             return (
                 <Fragment>
-                    <Button className="sessionEdit" variant="outline-info" onClick={handleOpen}>Edit Client</Button>
+                    <Button style={{marginLeft:"40%", position:"absolute"}} variant="outline-info" onClick={handleOpen}>Edit Client</Button>
                     <p><strong>Client name: </strong>{session.clientDetails.firstname + " "+ session.clientDetails.surname}</p>
                     <p><strong>Email: </strong>{session.clientDetails.email}</p>
                     <p><strong>Phone no: </strong>{session.clientDetails.mobilePhone}</p>
@@ -149,7 +150,9 @@ const SessionDetails = (props) => {
                 <Flexbox className="IndividualSessionDetails" flexDirection="column" alignItems="flex-start" display="inline-flex">
                     <Flexbox flexDirection="row" alignItems="baseline" display="inline-flex">
                         <p className="title">{sessions.title}</p>
-                        <Button className="sessionEdit" style={{marginTop:"120px"}} variant="outline-info">Edit</Button>
+                        {/* Pass in the edit flag and the session so we reuse the create session modal */}
+                        <SessionAdd mode="Edit" session ={sessions} ReloadSessions={ReloadSessions} />
+                        {/* <Button className="sessionEdit" style={{marginTop:"120px"}} variant="outline-info">Edit</Button> */}
                     </Flexbox>
                     <p>Share this single session with your client once you have filled out the details and have set a date and time.</p> 
                 </Flexbox>

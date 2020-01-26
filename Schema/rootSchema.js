@@ -1,6 +1,7 @@
 const { gql } = require("apollo-server");
 const clientSchema = require("./clientSchema");
 const sessionSchema = require("./sessionSchema");
+const userSchema = require("./userSchema");
 
 const rootSchema = gql`
   scalar Date
@@ -30,4 +31,4 @@ const rootSchema = gql`
   }
 `;
 
-module.exports = [rootSchema, sessionSchema, clientSchema];
+module.exports = [rootSchema, sessionSchema, clientSchema, userSchema];

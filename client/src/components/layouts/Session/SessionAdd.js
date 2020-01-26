@@ -11,7 +11,7 @@ import { addSession } from "../../../resolvers/sessionResolver";
 let globalState = {};
 
 const SessionAdd = (props) => {
-    const { ReloadSessions } = props;
+    const { mode, session, ReloadSessions } = props;
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -53,23 +53,23 @@ const SessionAdd = (props) => {
 
 
   return (
-    <div className="AddSession">
-        <Button variant="primary" onClick={handleShow}>
-            <i className='fas fa-plus' /> Create a new Session
+    <div className={`${mode === "Edit" ? 'sessionEdit' : 'AddSession'}`}>
+        <Button variant={`${mode === "Edit" ? 'outline-info' : 'primary'}`} onClick={handleShow}>
+            <i className='fas fa-plus' /> {mode==='Edit' ? 'Edit' : 'Create a new'} Session
         </Button>
 
         <Modal show={show} onHide={handleClose} size="md">
             <Modal.Header closeButton>
-                <Modal.Title><i className='fas fa-camera' /> Create a new session</Modal.Title>
+                <Modal.Title><i className='fas fa-camera' /> {mode==='Edit' ? 'Edit' : 'Create a new'} Session</Modal.Title>
             </Modal.Header>
-            <Modal.Body> <AddSessionForm /> </Modal.Body>
+            <Modal.Body> <AddSessionForm mode="Edit" session={session}/> </Modal.Body>
             
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Cancel
                 </Button>
                 <Button variant="primary" onClick={runAddSessionInput}>
-                    Create
+                    {mode==='Edit' ? 'Save' : 'Create'}
                 </Button>
             </Modal.Footer>
         </Modal>
@@ -78,8 +78,10 @@ const SessionAdd = (props) => {
 };
 
 
-const AddSessionForm = () =>{
+const AddSessionForm = (props) =>{
 
+    const { mode } = props;
+    const session = props.session || {};
     const [calendar, handleCalendar] = useState(false);
     const [date, setDate] = useState({
         selectedDate: ''
@@ -87,22 +89,8 @@ const AddSessionForm = () =>{
 
     const toggle = () => handleCalendar(!calendar);
     
-    const [sessionDetails, setSessionDetails] = useState({
-        title:"",
-        description:"",
-        sessionDate:"",
-        sessionStartTime:"",
-        sessionEndTime:"",
-        sessionFee:0,
-        address:{
-            streetNumber:"",
-            streetName:"",
-            suburb:"",
-            postcode: "",
-            state:""
-          },
-        notes:""
-    });
+    const [sessionDetails, setSessionDetails] = useState(session);
+
     useEffect(() => {
         console.log('mounted');
         return () => console.log('unmounting...');
@@ -153,7 +141,7 @@ const AddSessionForm = () =>{
     return(
         <div>
             <p><strong>Title your new Single Session</strong></p>
-            <FormControl name="title"
+            <FormControl name="title" value={sessionDetails.title}
             placeholder="E.g 'Kids Birthday Shoot' " onChange={handleSessionDetails}/>
             <br/>
 
@@ -161,12 +149,12 @@ const AddSessionForm = () =>{
 
             <p><strong>Add a short description of the session</strong></p>
             <FormControl as="textarea" name="description"
-            placeholder="E.g Jenny's birthday shoot in Blacktown" onChange={handleSessionDetails}/>
+            placeholder="E.g Jenny's birthday shoot in Blacktown" value={sessionDetails.description} onChange={handleSessionDetails}/>
             <br/>
             
             <p><strong>Session Date</strong></p>
             <InputGroup size="sm">
-                <FormControl id="CalendarValue" name="sessionDate" placeholder="Click to launch calendar" onChange={handleSessionDetails} readOnly onClick={toggle} value={date.selectedDate} />
+                <FormControl id="CalendarValue" name="sessionDate" placeholder="Click to launch calendar" onChange={handleSessionDetails} readOnly onClick={toggle} value={sessionDetails.sessionDate ? Moment(sessionDetails.sessionDate).format('Do MMMM YYYY') : date.selectedDate }/>
                 <InputGroup.Text onClick={toggle}>
                     <i className="far fa-calendar-alt" />
                 </InputGroup.Text>
@@ -192,25 +180,25 @@ const AddSessionForm = () =>{
                 <InputGroup.Prepend>
                     <InputGroup.Text style={{fontSize:'14px'}}>$ </InputGroup.Text>
                 </InputGroup.Prepend>           
-                <FormControl name="sessionFee" onChange={handleSessionDetails} />
+                <FormControl name="sessionFee" value={sessionDetails.sessionFee} onChange={handleSessionDetails} />
             </InputGroup>
             <br/>
 
             <p><strong>Location: </strong></p>
             <InputGroup size="sm">
-                <FormControl name="streetNumber" data-parent="address" onChange={handleSessionDetails} placeholder="Street No:" />
-                <FormControl name="streetName" data-parent="address" onChange={handleSessionDetails} placeholder="Street name" />
+                <FormControl name="streetNumber" data-parent="address" value={sessionDetails.address.streetNumber} onChange={handleSessionDetails} placeholder="Street No:" />
+                <FormControl name="streetName" data-parent="address" value={sessionDetails.address.streetName} onChange={handleSessionDetails} placeholder="Street name" />
             </InputGroup>
             <InputGroup size="sm">
-                <FormControl name="suburb" data-parent="address" onChange={handleSessionDetails} placeholder="Suburb" />
-                <FormControl name="postcode" data-parent="address" onChange={handleSessionDetails} placeholder="Postcode" />
-                <FormControl name="state" data-parent="address" onChange={handleSessionDetails} placeholder="State" />
+                <FormControl name="suburb" data-parent="address" value={sessionDetails.address.suburb} onChange={handleSessionDetails} placeholder="Suburb" />
+                <FormControl name="postcode" data-parent="address" value={sessionDetails.address.postcode} onChange={handleSessionDetails} placeholder="Postcode" />
+                <FormControl name="state" data-parent="address" value={sessionDetails.address.state} onChange={handleSessionDetails} placeholder="State" />
             </InputGroup>
             <br/>
 
             <p><strong>Session Notes: </strong></p>
             <InputGroup size="sm">
-                <FormControl name="notes" onChange={handleSessionDetails} as="textarea" placeholder="Enter any notes you would like to add" />
+                <FormControl name="notes" onChange={handleSessionDetails} value={sessionDetails.notes} as="textarea" placeholder="Enter any notes you would like to add" />
             </InputGroup>
 
         </div>
