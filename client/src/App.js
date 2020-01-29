@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import NavbarMenu from "./components/layouts/Navbar";
-import Session from "./components/layouts/Session/Session";
+import HomePage from "./components/layouts/HomePage/HomePage";
 import Routes from "./components/routes/Routes";
 
 
@@ -44,14 +44,12 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
       <Router>
+      <NavbarMenu />
         <div className="AllElements">
-          <NavbarMenu />
-          <div className="Container">
             <Switch>
-              <Route exact path="/" component={Session} />
+              <Route exact path="/" component={HomePage} />
               <Route component={Routes} />
             </Switch>
-          </div>
         </div>
       </Router>
     </ApolloProvider>

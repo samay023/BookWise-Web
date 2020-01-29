@@ -4,6 +4,15 @@ import { Link } from "react-router-dom";
 import "./NavbarStyle.css";
 
 const NavbarMenu = () => {
+
+  const authenticated = false;
+  // Need to check if the user is logged in 
+  // Otherwise hide the navbar. 
+
+  if (!authenticated){
+    return null
+  };
+
   return (
     <div className='NavBar'>
       <Row id="title">

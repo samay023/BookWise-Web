@@ -7,14 +7,14 @@ import Account from "../layouts/Account/Account";
 
 const Routes = () => {
   return (
-    <section>
+    <div className="Container">
       <Switch>
         <Route exact path="/session" component={Session} />
         <Route exact path="/clients" component={Client} />
         <Route exact path="/account" component={Account} />
         <Route component={NotFound} />
       </Switch>
-    </section>
+    </div>
   );
 };
 
