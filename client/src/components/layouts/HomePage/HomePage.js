@@ -1,20 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import "./HomePage.css";
 import { Form, Button } from "react-bootstrap";
 import Flexbox from "flexbox-react";
+import { login } from "../../../resolvers/authResolver";
+import { useLazyQuery } from '@apollo/react-hooks';
+import Session from "../Session/Session";
+import AuthContext from "../../../context/authContext";
+
 const HomePage = () => {
 
-    const isAuthenticated = false;
+    const [authContext, setAuthData ] = useContext(AuthContext);
+    const { isAuthenticated } = authContext;
 
+    console.log("Is Authenticated from context is " + isAuthenticated);
     const [validated, setValidated] = useState(false);
-    const handleSubmit = event => {
-
-        event.preventDefault();
-        event.stopPropagation();
-        
-        setValidated(true);
-        console.log(formData);
-    };
 
     const [formData, setFormData] = useState({
         email:"",
@@ -28,13 +28,48 @@ const HomePage = () => {
         setFormData(formData);
         return;
     };
-    // Add logic here
-    // Call graphql api on submit
-    // If valid response store token in httplocal
-    // else keep
-    // If Authenticated -> Redirect user to session page.
-    // Display sign up page when signup is clicked
-  return (
+
+    const handleSubmit = event => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        event.stopPropagation();  
+        if (!form.checkValidity()) {
+            setValidated(true);
+            return;
+        }
+        else{
+            handleAuthenticateUser(formData);
+        }
+        setValidated(true);      
+        return;  
+    };
+
+    const handleAuthenticateUser = async (formData) =>{
+        await authenticateUser({
+            variables:{email:formData.email, password:formData.password}
+        });
+    };
+
+    const [authenticateUser,{data}] = useLazyQuery(login);
+
+    useEffect(() => {
+
+    if(data && data.login){
+            console.log(data);
+            console.log(data.login.user.email);
+            localStorage.setItem("token", data.login.token);
+            setAuthData({
+                isAuthenticated: !!localStorage.getItem('token'),
+                userID:data.login.id,
+                email:data.login.email,
+                name:data.login.name
+            });
+        } 
+    },[data,setAuthData]);
+
+    if (isAuthenticated) return <Redirect to="/session" component={Session} />;
+
+    return ( 
           <Flexbox className="homepageBody" alignItems="center" display="flex" flexDirection="row">
                 <div className="background hide-sm"/>
                 <div className="loginContainer">

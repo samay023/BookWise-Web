@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Session.css";
 import SessionList from "./SessionList";
 import SessionAdd from "./SessionAdd";
@@ -6,8 +6,11 @@ import Moment from 'moment';
 
 import { useQuery } from '@apollo/react-hooks';
 import { getSessions } from "../../../resolvers/sessionResolver";
+import AuthContext from "../../../context/authContext";
 
 const Session = () => {
+
+  const [authContext, setAuthData] = useContext(AuthContext);
 
   // Sorts the session by months
   const sortByMonths = (sessions) => {

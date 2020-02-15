@@ -1,15 +1,18 @@
+import React, { useContext } from "react";
 import { Row } from "react-bootstrap";
-import React from "react";
 import { Link } from "react-router-dom";
 import "./NavbarStyle.css";
+import AuthContext from "../../context/authContext";
 
 const NavbarMenu = () => {
 
-  const authenticated = false;
+  const [ authContext ] = useContext(AuthContext);
+  const { isAuthenticated } = authContext;
+
   // Need to check if the user is logged in 
   // Otherwise hide the navbar. 
 
-  if (!authenticated){
+  if (!isAuthenticated){
     return null
   };
 
