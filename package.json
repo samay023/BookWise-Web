@@ -29,7 +29,7 @@
     "bcrypt": "^5.0.0",
     "graphql": "^14.5.8",
     "mongoose": "^5.7.1",
-    "config": "^3.2.2",
+    "config": "^3.3.8",
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
